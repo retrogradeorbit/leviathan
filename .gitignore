@@ -16,3 +16,5 @@ pom.xml.asc
 figwheel_server.log
 /out/
 .repl
+*~
+build/
