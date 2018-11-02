@@ -17,6 +17,7 @@
   (:require-macros [cljs.core.async.macros :refer [go]]
                    ;;[infinitelives.pixi.canvas :as c]
                    [infinitelives.pixi.pixelfont :as pf]
+                   [infinitelives.utils.async :as async]
                    )
   )
 
@@ -26,7 +27,8 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:text "Hello world!"}))
+(defonce app-state (atom {:text "Hello world!"
+                          :__figwheel_counter 0}))
 
 
 (defn on-js-reload []
@@ -84,9 +86,14 @@
                    :kerning {"fo" -2  "ro" -1 "la" -1 }
                    :space 5)
 
-    (c/with-sprite canvas :bg
-      [sprite (s/make-sprite :one)]
+    (loop []
+      (<! (let [load-num (:__figwheel_counter @app-state)]
+            (async/go-while (= load-num (:__figwheel_counter @app-state))
+                            (console.log "making sprite")
+                            (c/with-sprite canvas :bg
+                              [sprite (s/make-sprite :one)]
 
-      (loop []
-        (<! (e/next-frame))
-        (recur)))))
+                              (loop []
+                                (<! (e/next-frame))
+                                (recur))))))
+      (recur))))
