@@ -52,7 +52,7 @@
                                "checkouts/infinitelives.utils/src"
                                "checkouts/infinitelives.pixi/src"
                                ]
-                :compiler {:output-to "resources/public/js/compiled/leviathan.js"
+                :compiler {:output-to "build/js/compiled/leviathan.js"
                            :main leviathan.core
                            :optimizations :advanced
                            :pretty-print false
