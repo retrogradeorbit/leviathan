@@ -4,13 +4,16 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  
-  
+
+
   :min-lein-version "2.7.1"
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.238"]
-                 [org.clojure/core.async  "0.4.474"]]
+                 [org.clojure/core.async  "0.4.474"]
+                 [org.clojure/core.match "0.3.0-alpha4"]
+                 [infinitelives/infinitelives.pixi "0.1.2-SNAPSHOT"]
+                 ]
 
   :plugins [[lein-figwheel "0.5.16"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
@@ -19,7 +22,9 @@
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src"]
+                :source-paths ["src"
+                               "checkouts/infinitelives.pixi/src"
+                               "checkouts/infinitelives.utils/src"]
 
                 ;; The presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
@@ -43,11 +48,16 @@
                ;; production. You can build this with:
                ;; lein cljsbuild once min
                {:id "min"
-                :source-paths ["src"]
+                :source-paths ["src"
+                               "checkouts/infinitelives.utils/src"
+                               "checkouts/infinitelives.pixi/src"
+                               ]
                 :compiler {:output-to "resources/public/js/compiled/leviathan.js"
                            :main leviathan.core
                            :optimizations :advanced
-                           :pretty-print false}}]}
+                           :pretty-print false
+                           :externs ["externs/w3c_audio.js" "externs/w3c_gamepad.js" "externs/pixi.ext.js"]
+                           }}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
