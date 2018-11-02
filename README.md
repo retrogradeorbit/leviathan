@@ -1,6 +1,8 @@
 # leviathan
 Space knave plunders a deep space dreadnought for alien artefacts and space-dollars.
 
+[PLAY IT NOW!](https://retrogradeorbit.github.io/leviathan/)
+
 ## Overview
 
 For GameOff game jam November 2018
