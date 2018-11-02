@@ -11,8 +11,9 @@
             [infinitelives.utils.pathfind :as path]
             [infinitelives.utils.console :refer [log]]
             [infinitelives.utils.sound :as sound]
-
+            [cljs.core.async :refer [timeout]]
             [leviathan.assets :as assets]
+            [leviathan.tiles :as tiles]
             )
   (:require-macros [cljs.core.async.macros :refer [go]]
                    ;;[infinitelives.pixi.canvas :as c]
@@ -79,6 +80,8 @@
      (r/get-texture :tilesheet :nearest)
      assets/tiles)
 
+
+
     (pf/pixel-font :small "img/font.png" [11 117] [235 169]
                    :chars ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                            "abcdefghijklmnopqrstuvwxyz"
@@ -86,6 +89,14 @@
                    :kerning {"fo" -2  "ro" -1 "la" -1 }
                    :space 5)
 
+    (while true
+      (<! (tiles/run))
+      (<! (timeout 500)))
+
+
+
+
+    #_
     (loop []
       (<! (let [load-num (:__figwheel_counter @app-state)]
             (async/go-while (= load-num (:__figwheel_counter @app-state))
