@@ -1,20 +1,22 @@
 (ns leviathan.assets)
 
+(def ts 64)
+
 (def tiles
   {
-   :one {:pos [0 0] :size [32 32]}
+   :one {:pos [0 0] :size [ts ts]}
    })
 
 (def tile-mapping
   {
    :exit-up [0 0]
-   :exit-down [32 0]
-   :button-blue [64 0]
-   :door-blue [96 0]
-   :hashed-floor-blue [128 0]
-   :floor [(+ 128 32 +32) 32]
-   :wall-back [64 64]
-   :wall-front [0 96]
-   :wall-front-2 [32 96]
-   :wall-front-3 [64 96]
+   :exit-down [ts 0]
+   :button-blue [(* ts 2) 0]
+   :door-blue [(* ts 3) 0]
+   :hashed-floor-blue [(* ts 4) 0]
+   :floor [(+ (* ts 4) ts ts) ts]
+   :wall-back [(* ts 2) (* ts 2)]
+   :wall-front [0 (* ts 3)]
+   :wall-front-2 [ts (* ts 3)]
+   :wall-front-3 [(* ts 2) (* ts 3)]
    })

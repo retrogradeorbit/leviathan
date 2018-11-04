@@ -38,7 +38,7 @@
   (swap! app-state update-in [:__figwheel_counter] inc)
   )
 
-(defonce bg-colour 0x2F283A)
+(defonce bg-colour 0xD4D3BD)
 
 (defonce canvas
   (c/init {:layers [:bg :ocean :player :clouds :damage :score :ui :top-text]
@@ -53,8 +53,8 @@
 (defn make-background []
   (let [bg (js/PIXI.Graphics.)
         border-colour 0x000000
-        width 32
-        height 32
+        width 64
+        height 64
         full-colour 0xff0000
         ]
     (doto bg
@@ -63,7 +63,7 @@
       (.drawRect 0 0 width height)
       (.lineStyle 0 border-colour)
       (.beginFill full-colour)
-      (.drawRect 0 0 32 32)
+      (.drawRect 0 0 64 64)
       .endFill)
     (.generateTexture bg false)))
 

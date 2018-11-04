@@ -17,12 +17,13 @@
                    ;;[infinitelives.pixi.macros :as m]
                    [infinitelives.pixi.pixelfont :as pf]))
 
-(def scale 2)
+(def scale 1)
+(def size 64)
 
 (defn run []
   (go
     ;;(swap! state/state assoc :running? false)
-    (let [tile-set (tm/make-tile-set :tilesheet assets/tile-mapping [32 32])
+    (let [tile-set (tm/make-tile-set :tilesheet assets/tile-mapping [size size])
           [floor-tile-map wall-tile-map] [level/test-map level/wall-backs]
 
           floor-tile-results (tm/make-tile-sprites tile-set floor-tile-map)
@@ -35,7 +36,9 @@
 
           walls (s/make-container :children wall-tile-sprites
                                   :scale scale
-                                  :y (* scale -32))]
+                                  ;:y (* scale -96)
+                                  ;:y (* scale 32)
+                                  )]
       (c/with-sprite :bg
         [container (s/make-container :children [floor walls] :scale 1)]
         (c/with-sprite :ui
