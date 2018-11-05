@@ -40,6 +40,8 @@
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/leviathan.js"
                            :output-dir "resources/public/js/compiled/out"
+                           :install-deps true
+                           :npm-deps {"rot-js" "ondras/rot.js#master"}
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools

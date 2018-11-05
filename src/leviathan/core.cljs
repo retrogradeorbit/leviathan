@@ -71,6 +71,11 @@
   (go                              ;-until-reload
                                         ;state
                                         ; load resource url with tile sheet
+
+    ; get seed from the URL hash-fragment or else pick a new one and set the fragment
+    ; (rot/RNG.getSeed)
+    ; (rot/RNG.setSeed)
+
     (<! (r/load-resources canvas :ui ["img/tilesheet.png"
                                       "img/font.png"
 

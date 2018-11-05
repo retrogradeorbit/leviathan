@@ -24,7 +24,7 @@
   (go
     ;;(swap! state/state assoc :running? false)
     (let [tile-set (tm/make-tile-set :tilesheet assets/tile-mapping [size size])
-          tile-map level/test-map
+          tile-map (level/make-map)
 
           tile-results (tm/make-tile-sprites tile-set tile-map)
           tile-sprites (mapv second tile-results)
