@@ -18,3 +18,5 @@ figwheel_server.log
 .repl
 *~
 build/
+node_modules
+package*.json
