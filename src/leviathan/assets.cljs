@@ -15,7 +15,6 @@
    :door-blue [(* ts 3) 0]
    :hashed-floor-blue [(* ts 4) 0]
    :floor [(+ (* ts 4) ts ts) ts]
-   :wall-back [(* ts 2) (* ts 2)]
    :wall-front [0 (* ts 3)]
    :wall-front-2 [ts (* ts 3)]
    :wall-front-3 [(* ts 2) (* ts 3)]

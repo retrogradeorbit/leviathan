@@ -28,15 +28,6 @@
                      "X" :wall-front
                      "Y" :wall-front-2
                      "Z" :wall-front-3
-                     "^" :wall-back
                      }
                line))
-   test-map-src
-   ))
-
-(def wall-backs
-  (mapv
-   (fn [line] (mapv {:wall-front :wall-back
-                     :wall-front-2 :wall-back
-                     :wall-front-3 :wall-back} line))
-   test-map))
+   test-map-src))

@@ -24,23 +24,16 @@
   (go
     ;;(swap! state/state assoc :running? false)
     (let [tile-set (tm/make-tile-set :tilesheet assets/tile-mapping [size size])
-          [floor-tile-map wall-tile-map] [level/test-map level/wall-backs]
+          tile-map level/test-map
 
-          floor-tile-results (tm/make-tile-sprites tile-set floor-tile-map)
-          floor-tile-sprites (mapv second floor-tile-results)
-          floor-tile-locations (into #{} (mapv first floor-tile-results))
-          wall-tile-sprites (mapv second (tm/make-tile-sprites tile-set wall-tile-map))
+          tile-results (tm/make-tile-sprites tile-set tile-map)
+          tile-sprites (mapv second tile-results)
+          tile-locations (into #{} (mapv first tile-results))
 
-          floor (s/make-container :children floor-tile-sprites
-                                  :scale scale)
-
-          walls (s/make-container :children wall-tile-sprites
-                                  :scale scale
-                                  ;:y (* scale -96)
-                                  ;:y (* scale 32)
-                                  )]
+          map-sprite-set (s/make-container :children tile-sprites
+                                  :scale scale)]
       (c/with-sprite :bg
-        [container (s/make-container :children [floor walls] :scale 1)]
+        [level-map map-sprite-set]
         (c/with-sprite :ui
           [text (pf/make-text :small "Press Space Or Button To Start"
                               :scale scale :x 0 :y 0
@@ -51,7 +44,7 @@
                          (vec2/add
                           (vec2/vec2 -750 -500)
                           (vec2/rotate (vec2/vec2 100 0) theta )))]
-              (s/set-pos! container (vec2/vec2 (int x) (int y)))
+              (s/set-pos! level-map (vec2/vec2 (int x) (int y)))
               (<! (e/next-frame))
               (when-not (controls/fire?)
                 (recur (+ theta 0.01)))))
